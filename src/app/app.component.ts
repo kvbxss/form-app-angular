@@ -32,6 +32,7 @@ export class AppComponent {
       this.name = '';
       this.email = '';
       this.message = '';
+      this.isFormValid = false;
     } else {
       alert('Please fill in all required fields and correct any errors.');
     }
