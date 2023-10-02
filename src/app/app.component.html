@@ -13,6 +13,7 @@
         placeholder="Name"
         type="text"
         required
+        (input)="onValidityChange()"
         class="w-[300px] bg-white-700 rounded-xl shadow border p-2 m-3"
       />
     </my-form-field>
@@ -24,6 +25,7 @@
         type="text"
         required
         email
+        (input)="onValidityChange()"
         class="w-[300px] bg-white-700 rounded-xl shadow border p-2 m-3"
       />
     </my-form-field>
@@ -34,6 +36,7 @@
         placeholder="Message"
         type="text"
         required
+        (input)="onValidityChange()"
         maxlength="120"
         class="w-[300px] bg-white-700 rounded-xl shadow border p-2 m-3"
       />
@@ -41,7 +44,13 @@
     <button
       myButton
       type="submit"
+      [disabled]="!isFormValid"
       class="w-[300px] bg-violet-500 animate-pulse hover:bg-violet-700 hover:animate-none hover:scale-[1.1]' : 'bg-gray-300 cursor-not-allowed' text-white font-bold py-3 px-5 rounded-full ml-4 mt-4"
+      [class.bg-gray-300]="!isFormValid"
+      [class.cursor-not-allowed]="!isFormValid"
+      [class.bg-violet-500]="isFormValid"
+      [class.hover:bg-violet-700]="isFormValid"
+      [class.hover:scale-[1.1]]="isFormValid"
     >
       Ask Us! 🤔
     </button>

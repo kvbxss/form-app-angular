@@ -7,7 +7,21 @@ import { Component} from '@angular/core';
 })
 
 export class AppComponent {
-  name= '';
-  email= '';
-  message= '';
+  isFormValid: boolean = false;
+  name = '';
+  email = '';
+  message = '';
+
+
+  onValidityChange() {
+    const nameIsValid = !!this.name;
+    const emailIsValid = this.isValidEmail(this.email);
+    const messageIsValid = !!this.message;
+
+    this.isFormValid = nameIsValid && emailIsValid && messageIsValid;
+  }
+  
+  isValidEmail(email: string): boolean {
+    return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email);
+  }
 }
