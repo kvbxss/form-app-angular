@@ -1,0 +1,4 @@
+<ng-content></ng-content>
+<div *ngIf="errorMessage as config" class="error-message">
+  {{ config.key | translate : config.options }}
+</div>
