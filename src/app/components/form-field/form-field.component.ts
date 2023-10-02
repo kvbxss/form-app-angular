@@ -1,4 +1,4 @@
-import { Component, ContentChild, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ERROR_MESSAGES } from 'src/app/constants/error-messages.config';
 import { MyInputDirective } from 'src/app/directives/input.directive';
@@ -12,6 +12,8 @@ export class FormFieldComponent implements OnInit {
   @ContentChild(MyInputDirective, { static: true })
   myDirective!: MyInputDirective;
 
+  @Input() isValid: boolean = false;
+  
   constructor(private translateService: TranslateService) {}
 
   get errorMessage(): { key: string; options: any } | null {

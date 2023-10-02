@@ -24,4 +24,16 @@ export class AppComponent {
   isValidEmail(email: string): boolean {
     return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(email);
   }
+
+
+  submitForm() {
+    if (this.isFormValid) {
+      alert('Form submitted successfully!');
+      this.name = '';
+      this.email = '';
+      this.message = '';
+    } else {
+      alert('Please fill in all required fields and correct any errors.');
+    }
+  }
 }
