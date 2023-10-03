@@ -31,7 +31,7 @@ export class AppComponent {
 
   isMsgLengthValid(message: string): boolean {
     console.log(message)
-    return message.length <= 120;
+    return message.length < 120;
   }
 
 
