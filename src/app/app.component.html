@@ -32,13 +32,16 @@
       <input
         [(ngModel)]="message"
         myInput
-        placeholder="Message"
         type="text"
-        required
+        placeholder="Message"
         maxlength="120"
+        required
         (input)="onValidityChange()"
         class="w-[300px] bg-white-700 rounded-xl shadow border p-2 m-3"
       />
+      <ng-container *ngIf="!isMessageLengthValid">
+        <div class="text-red-500 mr-auto">Maximum of 120 characters.</div>
+      </ng-container>
     </my-form-field>
     <button
       myButton
@@ -47,6 +50,7 @@
       class="w-[300px] bg-violet-500 animate-pulse hover:bg-violet-700 hover:animate-none hover:scale-[1.1]' : 'bg-gray-300 cursor-not-allowed' text-white font-bold py-3 px-5 rounded-full ml-4 mt-4"
       [class.bg-gray-300]="!isFormValid"
       [class.cursor-not-allowed]="!isFormValid"
+      [class.animate-none]="!isFormValid"
       [class.bg-violet-500]="isFormValid"
       [class.hover:bg-violet-700]="isFormValid"
       [class.hover:scale-[1.1]]="isFormValid"
