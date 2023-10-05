@@ -13,8 +13,6 @@ export class FormFieldComponent implements OnInit {
   myDirective!: MyInputDirective;
 
   @Input() isValid: boolean = false;
-  
-  constructor(private translateService: TranslateService) {}
 
   get errorMessage(): { key: string; options: any } | null {
     const errors = Object.entries(
