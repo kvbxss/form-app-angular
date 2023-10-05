@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { MyInputDirective } from './directives/input.directive';
 import { FormFieldComponent } from './components/form-field/form-field.component';
