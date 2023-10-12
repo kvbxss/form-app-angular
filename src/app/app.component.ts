@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { HttpService } from './services/http.service';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -34,15 +35,29 @@ export class AppComponent {
     return message.length < 120;
   }
 
+  constructor(private httpService: HttpService) { }
 
 
   submitForm() {
+    const url = 'https://62f4bd57ac59075124c2c928.mockapi.io/';
+    
     if (this.isFormValid) {
       alert('Form submitted successfully!');
       this.name = '';
       this.email = '';
       this.message = '';
       this.isFormValid = false;
+
+      const firstUrl = url + 'url';
+      const secondUrl = url + 'next_url';
+
+      forkJoin([
+        this.httpService.get(firstUrl),
+        this.httpService.get(secondUrl)
+      ]).subscribe(([data1, data2]) => {
+        const neededMessage = data2.message;
+        alert(neededMessage);
+      });
     } else {
       alert('Please fill in all required fields and correct any errors.');
     }
