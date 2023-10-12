@@ -18,12 +18,12 @@ export class AppComponent {
   onValidityChange() {
     const nameIsValid = !!this.name;
     const emailIsValid = this.isValidEmail(this.email);
-    const messageIsValid = !!this.isMsgLengthValid(this.message);
+    const messageIsValid = this.isMsgLengthValid(this.message) && !!this.message;
     this.isMessageLengthValid = messageIsValid;
     
     this.isFormValid = nameIsValid && emailIsValid && messageIsValid;
     
-    console.log(this.isMsgLengthValid(this.message))
+    console.log(messageIsValid)
   }
   
   isValidEmail(email: string): boolean {
