@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpService } from './services/http.service';
-import { forkJoin } from 'rxjs';
+import { concatMap } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +18,7 @@ export class AppComponent {
   onValidityChange() {
     const nameIsValid = !!this.name;
     const emailIsValid = this.isValidEmail(this.email);
-    const messageIsValid = this.isMsgLengthValid(this.message);
+    const messageIsValid = !!this.isMsgLengthValid(this.message);
     this.isMessageLengthValid = messageIsValid;
     
     this.isFormValid = nameIsValid && emailIsValid && messageIsValid;
@@ -51,10 +51,11 @@ export class AppComponent {
       const firstUrl = url + 'url';
       const secondUrl = url + 'next_url';
 
-      forkJoin([
-        this.httpService.get(firstUrl),
-        this.httpService.get(secondUrl)
-      ]).subscribe(([data1, data2]) => {
+      this.httpService.get(firstUrl)
+      .pipe(
+        concatMap(data1 => this.httpService.get(secondUrl))
+      )
+      .subscribe(data2 => {
         const neededMessage = data2.message;
         alert(neededMessage);
       });
