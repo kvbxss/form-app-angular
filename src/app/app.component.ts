@@ -49,18 +49,12 @@ export class AppComponent {
       this.isFormValid = false;
 
       const firstUrl = url + 'url';
-      const secondUrl = url + 'next_url';
 
       this.httpService.get(firstUrl)
-      .pipe(
-        concatMap(data1 => this.httpService.get(secondUrl))
-      )
-      .subscribe(data2 => {
-        const neededMessage = data2.message;
-        alert(neededMessage);
+      .subscribe((response) => {
+        this.httpService.get(response.url).subscribe((response) =>
+        console.log(response) )
       });
-    } else {
-      alert('Please fill in all required fields and correct any errors.');
-    }
-  }
+}
+}
 }
